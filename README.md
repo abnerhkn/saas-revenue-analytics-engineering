@@ -1,50 +1,49 @@
-# SaaS Revenue Analytics Engineering Project
+# SaaS Revenue Analytics Engineering
 
-## Overview
+## Business Context
 
-This project demonstrates an end-to-end SaaS Revenue Analytics pipeline
-built using Snowflake and dbt Cloud.\
-It follows a modern data architecture approach with layered modeling
-(Bronze, Silver, Intermediate, Gold) and includes data quality
-validation.
+SaaS companies depend on reliable subscription metrics to understand
+growth, retention, and revenue health.\
+This project simulates a real-world SaaS analytics environment and
+implements core revenue intelligence metrics using a modern analytics
+engineering approach.
 
-The objective of this project is to simulate a real-world SaaS analytics
-environment and implement core subscription metrics such as MRR, churn
-rate, and revenue movements.
+The goal is to build a structured transformation layer that produces
+reliable and documented business KPIs.
 
 ------------------------------------------------------------------------
 
-## Architecture
+## Architecture Overview
 
-The project follows a layered data modeling strategy:
+The project follows a layered architecture in Snowflake using dbt Cloud:
 
 Bronze Layer\
-Raw data loaded into Snowflake from generated CSV files.
+Raw subscription data loaded into Snowflake tables.
 
 Silver Layer\
 Cleaned and standardized staging models.
 
 Intermediate Layer\
-Business logic transformations to reconstruct monthly subscription
-states and customer-level MRR.
+Business logic transformations to reconstruct customer subscription
+states and monthly MRR evolution.
 
 Gold Layer\
-Analytics-ready fact and dimension tables for SaaS KPIs.
+Analytics-ready fact and dimension tables that power SaaS KPIs.
 
 ------------------------------------------------------------------------
 
-## Tech Stack
+## Technology Stack
 
--   Snowflake (Data Warehouse)
--   dbt Cloud (Data Transformation)
--   SQL (Modeling and Business Logic)
+-   Snowflake (Cloud Data Warehouse)
+-   dbt Cloud (Transformation & Modeling)
+-   SQL (Business Logic & Modeling)
 -   GitHub (Version Control)
 
 ------------------------------------------------------------------------
 
 ## Data Model
 
-### Dimensions
+### Dimension Tables
 
 -   dim_customers
 
@@ -57,7 +56,7 @@ Analytics-ready fact and dimension tables for SaaS KPIs.
 
 ------------------------------------------------------------------------
 
-## Key Metrics Implemented
+## Metrics Implemented
 
 -   Monthly Recurring Revenue (MRR)
 -   New MRR
@@ -67,6 +66,9 @@ Analytics-ready fact and dimension tables for SaaS KPIs.
 -   Net New MRR
 -   Active Customers
 -   Monthly Churn Rate
+
+Revenue movements are classified as: - New - Expansion - Contraction -
+Churn - No Change
 
 ------------------------------------------------------------------------
 
@@ -78,37 +80,46 @@ Data validation is implemented using dbt tests:
 -   unique constraints
 -   relationship integrity between fact and dimension tables
 
-All transformations are documented using dbt docs.
+Documentation is generated using:
+
+dbt docs generate
 
 ------------------------------------------------------------------------
 
 ## How to Run
 
 1.  Configure Snowflake connection in dbt Cloud
-2.  Run: dbt run
-3.  Validate data quality: dbt test
-4.  Generate documentation: dbt docs generate
+
+2.  Run transformations:
+
+    dbt run
+
+3.  Execute data quality tests:
+
+    dbt test
+
+4.  Generate documentation:
+
+    dbt docs generate
 
 ------------------------------------------------------------------------
 
-## Project Goal
+## What This Project Demonstrates
 
-This project aims to demonstrate practical skills in:
-
--   Modern data warehouse architecture
--   Dimensional modeling
--   SaaS revenue analytics
--   Data transformation with dbt
--   Data quality engineering
+-   Layered data modeling architecture
+-   SaaS revenue analytics modeling
+-   Dimensional modeling principles
+-   Data quality engineering with dbt
+-   End-to-end analytics engineering workflow
 
 ------------------------------------------------------------------------
 
 ## Future Improvements
 
 -   Add orchestration with Airflow or Kestra
--   Implement snapshots (SCD Type 2)
--   Integrate S3 and Athena for lakehouse architecture
--   Build executive dashboard for KPI visualization
+-   Implement dbt snapshots (SCD Type 2)
+-   Integrate S3 + Athena for lakehouse architecture
+-   Deploy executive dashboard
 
 ------------------------------------------------------------------------
 

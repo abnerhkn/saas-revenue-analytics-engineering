@@ -1,142 +1,116 @@
-# SaaS Revenue Analytics Engineering
+# SaaS Revenue Analytics Engineering Project
 
-## 1. Project Overview
+## Overview
 
-This project simulates a SaaS B2B company.
+This project demonstrates an end-to-end SaaS Revenue Analytics pipeline
+built using Snowflake and dbt Cloud.\
+It follows a modern data architecture approach with layered modeling
+(Bronze, Silver, Intermediate, Gold) and includes data quality
+validation.
 
-The goal is to build a modern data pipeline and analytics layer using:
-
--   AWS S3
--   AWS Athena
--   AWS Glue Data Catalog
--   dbt (data transformation)
--   Apache Airflow (Docker)
-
-This project shows skills in:
-
--   Data modeling
--   ELT pipelines
--   Incremental models
--   Snapshots (SCD Type 2)
--   Analytics engineering best practices
+The objective of this project is to simulate a real-world SaaS analytics
+environment and implement core subscription metrics such as MRR, churn
+rate, and revenue movements.
 
 ------------------------------------------------------------------------
 
-## 2. Business Context
+## Architecture
 
-The company sells subscription plans to customers.
+The project follows a layered data modeling strategy:
 
-We want to answer important business questions:
+Bronze Layer\
+Raw data loaded into Snowflake from generated CSV files.
 
--   What is our MRR (Monthly Recurring Revenue)?
--   What is the churn rate?
--   What is the Net Revenue Retention?
--   How many customers upgrade or downgrade?
--   What is the LTV (Lifetime Value)?
+Silver Layer\
+Cleaned and standardized staging models.
 
-------------------------------------------------------------------------
+Intermediate Layer\
+Business logic transformations to reconstruct monthly subscription
+states and customer-level MRR.
 
-## 3. Architecture
-
-Data Flow:
-
-1.  Synthetic data is generated using Python
-2.  Data is stored in AWS S3 (raw layer)
-3.  AWS Glue Catalog manages metadata
-4.  AWS Athena queries the data
-5.  dbt transforms data (staging → intermediate → marts)
-6.  Airflow orchestrates the pipeline
-
-Architecture layers:
-
--   Bronze: Raw data
--   Silver: Cleaned and typed data
--   Gold: Business metrics and fact tables
+Gold Layer\
+Analytics-ready fact and dimension tables for SaaS KPIs.
 
 ------------------------------------------------------------------------
 
-## 4. Data Model
+## Tech Stack
 
-Main tables:
-
-Dimensions: - dim_customer - dim_plan - dim_date
-
-Facts: - fact_subscriptions - fact_invoices - fact_mrr_monthly -
-fact_churn
-
-Advanced: - Snapshot for customer plan changes (SCD Type 2) -
-Incremental revenue models
+-   Snowflake (Data Warehouse)
+-   dbt Cloud (Data Transformation)
+-   SQL (Modeling and Business Logic)
+-   GitHub (Version Control)
 
 ------------------------------------------------------------------------
 
-## 5. Metrics
+## Data Model
 
-Main business metrics:
+### Dimensions
 
--   MRR (Monthly Recurring Revenue)
--   Churn Rate
--   Net Revenue Retention (NRR)
--   Expansion Revenue
--   Contraction Revenue
--   LTV (Lifetime Value)
+-   dim_customers
 
-All metrics are defined inside dbt models.
+### Fact Tables
 
-------------------------------------------------------------------------
-
-## 6. Tech Stack
-
--   Python (data generation)
--   AWS S3 (data lake storage)
--   AWS Athena (query engine)
--   AWS Glue (catalog)
--   dbt-core (transformation)
--   Apache Airflow (orchestration)
--   Docker (local environment)
+-   fact_mrr_monthly
+-   fact_revenue_movements
+-   fct_churn_monthly
+-   fct_saas_metrics_monthly
 
 ------------------------------------------------------------------------
 
-## 7. Project Structure
+## Key Metrics Implemented
 
-    saas-revenue-analytics/
-    │
-    ├── data_generator/
-    ├── airflow/
-    ├── dbt_project/
-    │   ├── models/
-    │   │   ├── staging/
-    │   │   ├── intermediate/
-    │   │   ├── marts/
-    │   ├── snapshots/
-    │   └── tests/
-    ├── docker/
-    └── README.md
-    
+-   Monthly Recurring Revenue (MRR)
+-   New MRR
+-   Expansion MRR
+-   Contraction MRR
+-   Churn MRR
+-   Net New MRR
+-   Active Customers
+-   Monthly Churn Rate
+
 ------------------------------------------------------------------------
 
-## 8. Key Analytics Engineering Concepts
+## Data Quality
 
-This project demonstrates:
+Data validation is implemented using dbt tests:
 
--   Modern ELT architecture
+-   not_null constraints
+-   unique constraints
+-   relationship integrity between fact and dimension tables
+
+All transformations are documented using dbt docs.
+
+------------------------------------------------------------------------
+
+## How to Run
+
+1.  Configure Snowflake connection in dbt Cloud
+2.  Run: dbt run
+3.  Validate data quality: dbt test
+4.  Generate documentation: dbt docs generate
+
+------------------------------------------------------------------------
+
+## Project Goal
+
+This project aims to demonstrate practical skills in:
+
+-   Modern data warehouse architecture
 -   Dimensional modeling
--   Incremental processing
--   Historical tracking (SCD2)
--   Data quality tests in dbt
--   Cost-aware cloud design
+-   SaaS revenue analytics
+-   Data transformation with dbt
+-   Data quality engineering
 
 ------------------------------------------------------------------------
 
-## 9. Future Improvements
+## Future Improvements
 
--   Add CI/CD with GitHub Actions
--   Add data quality monitoring
--   Add dashboard (Power BI or Looker Studio)
--   Add data contracts
+-   Add orchestration with Airflow or Kestra
+-   Implement snapshots (SCD Type 2)
+-   Integrate S3 and Athena for lakehouse architecture
+-   Build executive dashboard for KPI visualization
 
 ------------------------------------------------------------------------
 
-## 10. Author
-
-Abner Hakinnen - Portfolio Project\
-Created for learning and professional development.
+Author: Abner Lima\
+Analytics Engineer Portfolio Project

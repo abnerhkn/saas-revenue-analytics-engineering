@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: SUBSCRIPTION_ANALYTICS
+    schema: BRONZE
+    tables:
+      - name: CUSTOMERS
+      - name: SUBSCRIPTION_EVENTS
+      - name: INVOICES

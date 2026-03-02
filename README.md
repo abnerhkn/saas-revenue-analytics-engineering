@@ -98,10 +98,20 @@ All metrics are defined inside dbt models.
 
 ## 7. Project Structure
 
-saas-revenue-analytics/ │ ├── data_generator/ ├── airflow/ ├──
-dbt_project/ │ ├── models/ │ │ ├── staging/ │ │ ├── intermediate/ │ │
-├── marts/ │ ├── snapshots/ │ └── tests/ ├── docker/ └── README.md
-
+    saas-revenue-analytics/
+    │
+    ├── data_generator/
+    ├── airflow/
+    ├── dbt_project/
+    │   ├── models/
+    │   │   ├── staging/
+    │   │   ├── intermediate/
+    │   │   ├── marts/
+    │   ├── snapshots/
+    │   └── tests/
+    ├── docker/
+    └── README.md
+    
 ------------------------------------------------------------------------
 
 ## 8. Key Analytics Engineering Concepts
